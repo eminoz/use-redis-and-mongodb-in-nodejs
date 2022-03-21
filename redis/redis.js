@@ -1,4 +1,4 @@
-const req = require('express/lib/request');
+
 const redis = require('../database/redisConnection')
 const UserModel = require("../model/RedisModel")
 

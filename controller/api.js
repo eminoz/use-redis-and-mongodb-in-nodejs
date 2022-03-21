@@ -1,5 +1,4 @@
-const { registerNewUser, fetchUser, fetchAllUser } = require("../redis/redis");
-const User = require("../model/user");
+
 const UserService = require("../services/user")
 
 module.exports = async (app) => {
