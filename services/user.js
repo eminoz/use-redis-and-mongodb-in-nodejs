@@ -31,7 +31,15 @@ class UserService {
         const { _id } = req.body
         try {
             const resultUser = await this.redis.fetchUser({ _id })
-            return resultUser
+            if (resultUser) {
+                return resultUser
+            } else {
+                const resultUser = await this.user.findById(_id)
+                var message = "returned from mongodb"
+                const result = { message, resultUser }
+
+                return result
+            }
         } catch (error) {
             throw error
         }
@@ -39,6 +47,8 @@ class UserService {
     }
     async fetchAllUser() {
         try {
+            // const allUser = await this.user.find()
+
             const allUser = await this.redis.fetchAllUser()
             return allUser
         } catch (error) {
