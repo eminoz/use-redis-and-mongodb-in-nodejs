@@ -7,6 +7,7 @@ async function registerNewUser({ result, person }) {
     person.surname,
     person.address
   ).User();
+
   const userId = `User:${result._id.toString()}`;
   const user = await redis.hset(userId, userData);
   return user;
@@ -44,9 +45,7 @@ async function fetchAllUser() {
   };
 
   const user = await redis.keys(`User*`);
-  const result = fetchTheUsersFromRedis(user).then((user) => {
-    return user;
-  });
+  const result = await fetchTheUsersFromRedis(user);
   return result;
 }
 async function updateUser({ _id, name, surname, address }) {
